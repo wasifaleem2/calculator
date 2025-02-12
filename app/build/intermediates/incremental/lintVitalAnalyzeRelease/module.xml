@@ -1,6 +1,6 @@
 <lint-module
     format="1"
-    dir="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\android\app"
+    dir="F:\My personel\native\NativeProject\android\app"
     name=":app"
     type="APP"
     maven="NativeProject:app:"

@@ -1,14 +1,14 @@
-#Wed Mar 22 14:44:35 PKT 2023
+#Tue Feb 11 17:05:11 PKT 2025
 path.4=4/classes.dex
 path.3=14/classes.dex
 path.2=0/classes.dex
 path.1=0/classes.dex
 path.0=classes.dex
-base.4=C\:\\Users\\DELL\\Desktop\\Wasif document\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
-base.3=C\:\\Users\\DELL\\Desktop\\Wasif document\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
-base.2=C\:\\Users\\DELL\\Desktop\\Wasif document\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.1=C\:\\Users\\DELL\\Desktop\\Wasif document\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
-base.0=C\:\\Users\\DELL\\Desktop\\Wasif document\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.4=F\:\\My personel\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
+base.3=F\:\\My personel\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.2=F\:\\My personel\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.1=F\:\\My personel\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.0=F\:\\My personel\\native\\NativeProject\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex

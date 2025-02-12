@@ -1,9 +1,9 @@
 <libraries>
   <library
-      name="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\android@@:react-native-picker_picker::release"
-      jars="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\node_modules\@react-native-picker\picker\android\build\.transforms\76c3d75f704989269d5ef0791796610f\transformed\out\jars\classes.jar;C:\Users\DELL\Desktop\Wasif document\native\NativeProject\node_modules\@react-native-picker\picker\android\build\.transforms\76c3d75f704989269d5ef0791796610f\transformed\out\jars\libs\R.jar"
+      name="F:\My personel\native\NativeProject\android@@:react-native-picker_picker::release"
+      jars="F:\My personel\native\NativeProject\node_modules\@react-native-picker\picker\android\build\.transforms\c0621d164761569597b7386ba65725d0\transformed\out\jars\classes.jar;F:\My personel\native\NativeProject\node_modules\@react-native-picker\picker\android\build\.transforms\c0621d164761569597b7386ba65725d0\transformed\out\jars\libs\R.jar"
       resolved="NativeProject:react-native-picker_picker:unspecified"
-      folder="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\node_modules\@react-native-picker\picker\android\build\.transforms\76c3d75f704989269d5ef0791796610f\transformed\out"
+      folder="F:\My personel\native\NativeProject\node_modules\@react-native-picker\picker\android\build\.transforms\c0621d164761569597b7386ba65725d0\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -39,6 +39,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="F:\My personel\native\NativeProject\android@@:react-native-vector-icons::release"
+      jars="F:\My personel\native\NativeProject\node_modules\react-native-vector-icons\android\build\.transforms\9c3134c3e792be7132a2836bfb1c2098\transformed\out\jars\classes.jar;F:\My personel\native\NativeProject\node_modules\react-native-vector-icons\android\build\.transforms\9c3134c3e792be7132a2836bfb1c2098\transformed\out\jars\libs\R.jar"
+      resolved="NativeProject:react-native-vector-icons:unspecified"
+      folder="F:\My personel\native\NativeProject\node_modules\react-native-vector-icons\android\build\.transforms\9c3134c3e792be7132a2836bfb1c2098\transformed\out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="com.facebook.react:hermes-android:0.71.4:release@aar"
       jars="C:\Users\DELL\.gradle\caches\transforms-3\dde9d250912d8eeaa7cfac916d57e4d4\transformed\jetified-hermes-android-0.71.4-release\jars\classes.jar"
       resolved="com.facebook.react:hermes-android:0.71.4"
@@ -52,10 +65,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\android@@:react-native-async-storage_async-storage::release"
-      jars="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\node_modules\@react-native-async-storage\async-storage\android\build\.transforms\f65833a3add691252d28b3bee1f7363b\transformed\out\jars\classes.jar;C:\Users\DELL\Desktop\Wasif document\native\NativeProject\node_modules\@react-native-async-storage\async-storage\android\build\.transforms\f65833a3add691252d28b3bee1f7363b\transformed\out\jars\libs\R.jar"
+      name="F:\My personel\native\NativeProject\android@@:react-native-async-storage_async-storage::release"
+      jars="F:\My personel\native\NativeProject\node_modules\@react-native-async-storage\async-storage\android\build\.transforms\44294dc3193ba44dbd93185447c2ff29\transformed\out\jars\classes.jar;F:\My personel\native\NativeProject\node_modules\@react-native-async-storage\async-storage\android\build\.transforms\44294dc3193ba44dbd93185447c2ff29\transformed\out\jars\libs\R.jar"
       resolved="NativeProject:react-native-async-storage_async-storage:unspecified"
-      folder="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\node_modules\@react-native-async-storage\async-storage\android\build\.transforms\f65833a3add691252d28b3bee1f7363b\transformed\out"
+      folder="F:\My personel\native\NativeProject\node_modules\@react-native-async-storage\async-storage\android\build\.transforms\44294dc3193ba44dbd93185447c2ff29\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -65,10 +78,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\android@@:react-native-splash-screen::release"
-      jars="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\node_modules\react-native-splash-screen\android\build\.transforms\52ddf4b15de070a0c55d184c6816938f\transformed\out\jars\classes.jar;C:\Users\DELL\Desktop\Wasif document\native\NativeProject\node_modules\react-native-splash-screen\android\build\.transforms\52ddf4b15de070a0c55d184c6816938f\transformed\out\jars\libs\R.jar"
+      name="F:\My personel\native\NativeProject\android@@:react-native-splash-screen::release"
+      jars="F:\My personel\native\NativeProject\node_modules\react-native-splash-screen\android\build\.transforms\bff076965aa309fa887159c476edfe3d\transformed\out\jars\classes.jar;F:\My personel\native\NativeProject\node_modules\react-native-splash-screen\android\build\.transforms\bff076965aa309fa887159c476edfe3d\transformed\out\jars\libs\R.jar"
       resolved="NativeProject:react-native-splash-screen:unspecified"
-      folder="C:\Users\DELL\Desktop\Wasif document\native\NativeProject\node_modules\react-native-splash-screen\android\build\.transforms\52ddf4b15de070a0c55d184c6816938f\transformed\out"
+      folder="F:\My personel\native\NativeProject\node_modules\react-native-splash-screen\android\build\.transforms\bff076965aa309fa887159c476edfe3d\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
