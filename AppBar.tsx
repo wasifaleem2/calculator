@@ -3,6 +3,7 @@ import type {PropsWithChildren} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {StyleSheet, Text, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
 interface Theme {
@@ -33,7 +34,7 @@ function AppBar(props: AppBarProps): JSX.Element {
       top: 0,
       backgroundColor: props.theme.primary,
       width: '100%',
-      height: 60,
+      height: 48,
       display: 'flex',
       justifyContent: 'center',
       alignItems: "center",
@@ -41,7 +42,8 @@ function AppBar(props: AppBarProps): JSX.Element {
     },
     headerHeading: {
       color: props.theme.secondary,
-      fontSize: 30,
+      fontSize: 25,
+      fontWeight: "800",
       marginLeft: 30,
       marginRight: "auto"
     },
@@ -51,7 +53,7 @@ function AppBar(props: AppBarProps): JSX.Element {
     },
     picker: {
       width: 50,
-      marginRight: 30,
+      marginRight: 10,
       color: props.theme.secondary,
     },
   });
@@ -63,8 +65,9 @@ function AppBar(props: AppBarProps): JSX.Element {
 
   return (
     <View style={styles.header}>
-      <Text style={styles.headerHeading}>{'WA Calculator'}</Text>
-      <Text style={styles.pickerLabel}>{'theme'}</Text>
+      <Text style={styles.headerHeading}>{'Calculator'}</Text>
+      {/* <Text style={styles.pickerLabel}>{'theme'}</Text> */}
+      <MaterialIcons name="invert-colors" size={20} color="white" />
       <Picker
         style={styles.picker}
         selectedValue={props.theme}
@@ -76,11 +79,11 @@ function AppBar(props: AppBarProps): JSX.Element {
           }
         }>
         <Picker.Item style={{display:"none"}} enabled={false} label="Select Color" value={{primary: "#AED7F1", secondary:"#2471A3", font1:"#FBECFC"}} />
-        <Picker.Item label="blue" value={{primary: "#AED6F1", secondary:"#2471A4", font1:"#FBFCFC"}} />
-        <Picker.Item label="green" value={{primary: "#ABFF6E", secondary:"#438117", font1:"#FBFCFC"}} />
-        <Picker.Item label="pink" value={{primary: "#FFAEE6", secondary:"#D66BB5", font1:"#FBFCFC"}} />
-        <Picker.Item label="coral" value={{primary: "#F08080", secondary:"#CD5C5C", font1:"#FBFCFC"}} />
+        <Picker.Item label="blue" value={{primary: "#A1E3F9", secondary:"#3674B5", font1:"#FBFCFC"}} />
         <Picker.Item label="dark" value={{primary: "#34495E", secondary:"#17202A", font1:"#FBFCFC"}} />
+        <Picker.Item label="green" value={{primary: "#A3D1C6", secondary:"#3D8D7A", font1:"#FBFFE4"}} />
+        <Picker.Item label="Yellow" value={{primary: "#F7F7F7", secondary:"#FFB22C", font1:"#854836"}} />
+        <Picker.Item label="coral" value={{primary: "#FFCDB2", secondary:"#E5989B", font1:"#DE3163"}} />
       </Picker>
     </View>
   );

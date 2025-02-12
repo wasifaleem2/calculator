@@ -1,242 +1,249 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React, { useEffect, useState } from 'react';
-import type {PropsWithChildren} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  Button,
-  ImageBackground,
+  Dimensions,
   Keyboard,
+  Modal,
   Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
-  useColorScheme,
   View,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SplashScreen from 'react-native-splash-screen'
 import AppBar from './AppBar';
-// import Icon from 'react-native-vector-icons/Ionicons';
-// import Icon, {caretup} from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 
+const { width, height } = Dimensions.get("window");
 
-
+interface HistoryInterface {
+  equation: string;
+  result: string;
+}
 function App(): JSX.Element {
-  const [fieldValue, setFieldValue] = useState<String>("");
-  const [equation, setEquation] = useState<String>("");
-  const [theme, setTheme] = useState<Theme>({primary: "skyblue", secondary:"navy", font1:"#FBECFC"});
-  
-  useEffect(()=>{
+  const scrollViewRef = useRef<ScrollView>(null);
+  const [fieldValue, setFieldValue] = useState<string>("");
+  const [equation, setEquation] = useState<string>("");
+  const [history, setHistory] = useState<HistoryInterface[] | []>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [theme, setTheme] = useState({ primary: "skyblue", secondary: "navy", font1: "#FBECFC" });
+
+  useEffect(() => {
     AsyncStorage.getItem('theme').then((value) => {
       if (value) {
         setTheme(JSON.parse(value));
-        console.log("from storageL ", theme)
-      }
-      else{
-        setTheme({primary: "#AED7F1", secondary:"#2471A3", font1:"#FBECFC"});
+      } else {
+        setTheme({ primary: "#AED7F1", secondary: "#2471A3", font1: "#FBECFC" });
       }
     });
-  },[])
+  }, []);
+
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+  }, [showModal]);
 
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: theme?.primary,
+      backgroundColor: theme.primary,
       width: '100%',
       height: '100%',
-      flexWrap: 'wrap',
+      flex: 1,
+    },
+    modal: {
+      margin: "20%",
+      height: height * 0.60,
+      width: "60%",
+      backgroundColor: theme.font1,
+    },
+    modalHeading: {
+      color: "black",
+      fontSize: 20,
+    },
+    modalScroll: {
+      height: height * 0.48,
+      width: "100%",
+    },
+    modalEquation: {
+      fontSize: 15,
+      color: theme.primary
+    },
+    modalResult: {
+      fontSize: 20,
+      color: theme.secondary
+    },
+    modalButton: {
+      // backgroundColor: "red",
+      justifyContent: 'center',
+      alignItems: 'center',
+      // width: "40%",
+      alignSelf: "flex-end",
+      marginTop: "auto",
+      marginRight: "2%"
     },
     top: {
       backgroundColor: 'white',
-      padding: 0,
-      display: 'flex',
+      // padding: 10,
       justifyContent: 'center',
       alignItems: 'center',
-      height: '40%',
+      height: height * 0.30,
       width: '100%',
     },
     input: {
-      display: 'flex',
-      justifyContent: "center",
       position: 'absolute',
-      bottom: "10%",
-      backgroundColor: 'transparent',
-      paddingRight: 30,
-      opacity: 1,
-      width: "100%",
-      height: "60%",
-      padding: 20,
+      bottom: height * 0.05,
+      width: "90%",
     },
     inputText: {
-      color: theme?.secondary,
-      fontSize: 35,
+      color: theme.secondary,
+      fontSize: width * 0.08,
       textAlign: "right",
     },
     equation: {
-      color: theme?.primary,
-      fontSize: 20,
+      color: theme.primary,
+      fontSize: width * 0.05,
       textAlign: "right",
-      marginBottom: 20,  
+      marginBottom: 10,
     },
     buttonBox: {
-      height: '60%',
-      width: '100%',
-      display: 'flex',
+      flex: 1,
+      flexDirection: 'row',
+      flexWrap: "wrap",
       justifyContent: 'center',
       alignItems: 'center',
-      flexDirection: 'row',
-      padding: "2%",
-      flexWrap: "wrap",
+      padding: width * 0.02,
+    },
+    button: {
+      backgroundColor: theme.secondary,
+      height: height * 0.1,
+      width: width * 0.2,
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: width * 0.02,
+      borderRadius: 18,
     },
     enterButton: {
       backgroundColor: "#CD6161",
-      height: "16%",
-      width: "20%",
-      display: 'flex',
+      height: height * 0.1,
+      width: width * 0.2,
       justifyContent: 'center',
       alignItems: 'center',
-      margin: "2%",
-      borderRadius: 12,
-    },
-    button: {
-      backgroundColor: theme?.secondary,
-      height: "16%",
-      width: "20%",
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      margin: "2%",
-      borderRadius: 12,
+      margin: width * 0.02,
+      borderRadius: 18,
     },
     buttonText: {
-      color: theme?.font1,
-      fontSize: 20,
+      color: theme.font1,
+      fontSize: width * 0.06,
     },
   });
-  interface Theme {
-    primary: string;
-    secondary: string;
-    font1: string;
-  }
 
-  const setFieldText = (input: any) => {
-    if(fieldValue.length < 5){
+  const setFieldText = (input: string) => {
+    if (fieldValue.length < 5) {
       setFieldValue(fieldValue + input);
     }
-    // let lastChar:String = fieldValue.slice(-1)
-    // console.log(lastChar);
-  }
-  const equalsTo = (input: any) => {
-    try{
-      setEquation(fieldValue + input);
+  };
+
+  let buttons = [
+    {label: "C", value: "C"},
+    {label: <Icon name="caret-left" size={20} color="white" />, value: "B"},
+    {label: <Icon name="percentage" size={20} color="white" />, value: "%",},
+    {label: <Icon name="divide" size={20} color="white" />, value: "/"},
+    {label: "9", value: "9"},
+    {label: "8", value: "8"},
+    {label: "7", value: "7"},
+    {label: <EntypoIcon name="cross" size={28} color="white" />, value: "*"},
+    {label: "6", value: "6"},
+    {label: "5", value: "5"},
+    {label: "4", value: "4"},
+    {label: <Icon name="minus" size={20} color="white" />, value: "-"},
+    {label: "3", value: "3"},
+    {label: "2", value: "2"},
+    {label: "1", value: "1"},
+    {label: <Icon name="plus" size={20} color="white" />, value: "+"},
+    {label: "0", value: "0"},
+    {label: ".", value: "."},
+    {label: "Hst", value: "Hst"},
+    {label: <Icon name="equals" size={20} color="white" />, value: "="},
+  ]
+
+  const equalsTo = () => {
+    try {
+      setEquation(fieldValue);
       let result = eval(fieldValue.toString());
-      setFieldValue(result);
-    }
-    catch(error){
+      let newResult: HistoryInterface = { equation: fieldValue, result: result.toString() };
+      setHistory(prevHistory => [...prevHistory, newResult]);
+      setFieldValue(result.toString());
+    } catch (error) {
       console.log(error);
     }
-  }
-  const modulus100 = () => {
-    setEquation(fieldValue);
-    let result:any = Number(fieldValue)/100;
-    setFieldValue(result);
-  }
-  return (
-    <View style={styles.container}>
-      <View style={styles.top}>
-        <AppBar colors={(t) => setTheme(t)} theme={theme} /> 
-        {/* <TextInput
-          style={styles.input}
-          onFocus={Keyboard.dismiss()} 
+  };
 
-          // autoFocus={true}
-          // onChangeText={onChangeText}
-          // value={text}
-        /> */}
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={theme.primary} barStyle="dark-content" />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showModal}
+      >
+        <View style={styles.modal}>
+          <Text style={styles.modalHeading} >History</Text>
+          <ScrollView ref={scrollViewRef} style={styles.modalScroll}>
+            {
+              history.map((hst, index)=>(
+                <View key={index}>
+                  <Text style={styles.modalEquation}>{hst.equation}</Text>
+                  <Text style={styles.modalResult}>{hst.result}</Text>
+                </View>
+              ))
+            }
+          </ScrollView >
+          <TouchableOpacity style={styles.modalButton} onPress={()=>setShowModal(false)}><Icon name="window-close" size={40} color="red" /></TouchableOpacity>
+        </View>
+      </Modal>
+      <View style={styles.top}>
+      <AppBar colors={(t) => setTheme(t)} theme={theme} />
         <View style={styles.input}>
+          {/* <Pressable onPress={()=>setShowModal(true)}><Text>Hst</Text></Pressable> */}
           <Text style={styles.equation}>{equation}</Text>
           <Text style={styles.inputText}>{fieldValue}</Text>
         </View>
       </View>
+
       <View style={styles.buttonBox}>
-        <TouchableOpacity style={styles.button} onPress={()=>{setFieldValue(""); setEquation("")}}>
-          <Text style={styles.buttonText}>C</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldValue(
-          fieldValue.substring(0, fieldValue.length - 1))}>
-          <Text style={styles.buttonText}>&#x2190;</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>modulus100()}>
-          <Text style={styles.buttonText}>&#x25;</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("/")}>
-          <Text style={styles.buttonText}>&#247;</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("1")}>
-          <Text style={styles.buttonText}>1</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("2")}>
-          <Text style={styles.buttonText}>2</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("3")}>
-          <Text style={styles.buttonText}>3</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("*")}>
-          <Text style={styles.buttonText}>&#9587;</Text>
-          {/* <Icon name="caretup" size={30} color="#900" /> */}
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("4")}>
-          <Text style={styles.buttonText}>4</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("5")}>
-          <Text style={styles.buttonText}>5</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("6")}>
-          <Text style={styles.buttonText}>6</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("-")}>
-          <Text style={styles.buttonText}>&#8722;</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("7")}>
-          <Text style={styles.buttonText}>7</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("8")}>
-          <Text style={styles.buttonText}>8</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("9")}>
-          <Text style={styles.buttonText}>9</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("+")}>
-          <Text style={styles.buttonText}>&#x2b;</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("00")}>
-          <Text style={styles.buttonText}>00</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText("0")}>
-          <Text style={styles.buttonText}>0</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>setFieldText(".")}>
-          <Text style={styles.buttonText}>.</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.enterButton} onPress={()=>equalsTo("=")}>
-          <Text style={styles.buttonText}>&#x3d;</Text>
-        </TouchableOpacity>
+        {buttons.map((btn, index) => (
+          <TouchableOpacity
+            key={index}
+            style={btn.value === "=" ? styles.enterButton : styles.button}
+            onPress={() => {
+              if (btn.value === "C") {
+                setFieldValue("");
+                setEquation("");
+              } else if (btn.value === "B") {
+                setFieldValue(fieldValue.substring(0, fieldValue.length - 1));
+              } else if (btn.value === "Hst") {
+                setShowModal(!showModal)
+              } else if (btn.value === "%") {
+                setFieldValue((Number(fieldValue) / 100).toString())
+                setEquation(fieldValue);
+                // equalsTo();
+              } else if (btn.value === "=") {
+                equalsTo();
+              } else {
+                setFieldText(btn.value);
+              }
+            }}
+          >
+            <Text style={styles.buttonText}>{btn.label}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
-
 
 export default App;
