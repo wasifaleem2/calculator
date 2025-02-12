@@ -25,6 +25,7 @@ interface HistoryInterface {
 }
 function App(): JSX.Element {
   const scrollViewRef = useRef<ScrollView>(null);
+  const [startNew, setStartNew] = useState<boolean>(false);
   const [fieldValue, setFieldValue] = useState<string>("");
   const [equation, setEquation] = useState<string>("");
   const [history, setHistory] = useState<HistoryInterface[] | []>([]);
@@ -45,7 +46,7 @@ function App(): JSX.Element {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollToEnd({ animated: true });
     }
-  }, [showModal]);
+  }, [showModal, history]);
 
   const styles = StyleSheet.create({
     container: {
@@ -142,7 +143,10 @@ function App(): JSX.Element {
   });
 
   const setFieldText = (input: string) => {
-    if (fieldValue.length < 5) {
+    if(startNew){
+      setFieldValue(input)
+      setStartNew(false)
+    } else if (fieldValue.length < 5) {
       setFieldValue(fieldValue + input);
     }
   };
@@ -232,6 +236,7 @@ function App(): JSX.Element {
                 setEquation(fieldValue);
                 // equalsTo();
               } else if (btn.value === "=") {
+                setStartNew(true)
                 equalsTo();
               } else {
                 setFieldText(btn.value);
