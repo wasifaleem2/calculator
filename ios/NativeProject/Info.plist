@@ -46,8 +46,9 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
+		<!-- uncomment below for screen rotation and landscape orientation -->
+		<!-- <string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string> -->
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
