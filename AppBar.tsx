@@ -66,7 +66,7 @@ function AppBar(props: AppBarProps): JSX.Element {
 
   return (
     <View style={styles.header}>
-      <Text style={styles.headerHeading}>{'Calculator'}</Text>
+      <Text style={styles.headerHeading}>{'WA Calculator'}</Text>
       {/* <Text style={styles.pickerLabel}>{'theme'}</Text> */}
       <MaterialIcons name="invert-colors" size={20} color="white" />
       <Picker

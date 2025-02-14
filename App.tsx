@@ -74,9 +74,10 @@ function App(): JSX.Element {
       height: screen.height * 0.6, 
       width: '60%',
       backgroundColor: theme.font1,
+      padding: "2%",
     },
     modalHeading: {
-      color: 'black',
+      color: theme.secondary,
       fontSize: 20,
     },
     modalScroll: {
@@ -92,7 +93,7 @@ function App(): JSX.Element {
       color: theme.secondary,
     },
     modalButton: {
-      // backgroundColor: "red",
+      backgroundColor: "red",
       justifyContent: 'center',
       alignItems: 'center',
       // width: "40%",
@@ -159,9 +160,9 @@ function App(): JSX.Element {
   const setFieldText = (input: string) => {
     if(input === "+" || input === "-" || input === "*" || input === "/"){
       setFieldValue(fieldValue + input);
+      setStartNew(false);
     } else if (startNew) {
       setFieldValue(input);
-      setStartNew(false);
     } else if (fieldValue.length < 30) {
       setFieldValue(fieldValue + input);
     }
@@ -205,6 +206,12 @@ function App(): JSX.Element {
     }
   };
 
+  const handleHistoryResult = (_hst: string) => {
+    setFieldValue(_hst);
+    setEquation("");
+    setShowModal(false);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={theme.primary} barStyle="dark-content" />
@@ -215,14 +222,15 @@ function App(): JSX.Element {
             {history.map((hst, index) => (
               <View key={index}>
                 <Text style={styles.modalEquation}>{hst.equation}</Text>
-                <Text style={styles.modalResult}>{hst.result}</Text>
+                <Text style={styles.modalResult} onPress={()=>handleHistoryResult(hst.result)}>={hst.result}</Text>
               </View>
             ))}
           </ScrollView>
           <TouchableOpacity
             style={styles.modalButton}
             onPress={() => setShowModal(false)}>
-            <Icon name="window-close" size={40} color="red" />
+              {/* <Text>Close</Text> */}
+            <Icon name="window-close" size={40} color="white" />
           </TouchableOpacity>
         </View>
       </Modal>
