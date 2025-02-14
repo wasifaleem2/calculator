@@ -17,31 +17,34 @@ import AppBar from './AppBar';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 
-const {width, height} = Dimensions.get('window');
+// const {width, height} = Dimensions.get('window');
 
 interface HistoryInterface {
   equation: string;
   result: string;
 }
+
+const getScreenSize = () => {
+  const { width, height } = Dimensions.get('window');
+  return { width, height, isPortrait: height >= width };
+};
+
 function App(): JSX.Element {
   const scrollViewRef = useRef<ScrollView>(null);
+  const [screen, setScreen] = useState(getScreenSize());
   const [startNew, setStartNew] = useState<boolean>(false);
   const [fieldValue, setFieldValue] = useState<string>('');
   const [equation, setEquation] = useState<string>('');
   const [history, setHistory] = useState<HistoryInterface[] | []>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [theme, setTheme] = useState({
-    primary: 'skyblue',
-    secondary: 'navy',
-    font1: '#FBECFC',
-  });
+  const [theme, setTheme] = useState({primary: "#F7F7F7", secondary:"#FFB22C", font1:"#854836", font2:"#C14600"});
 
   useEffect(() => {
     AsyncStorage.getItem('theme').then(value => {
       if (value) {
         setTheme(JSON.parse(value));
       } else {
-        setTheme({primary: '#AED7F1', secondary: '#2471A3', font1: '#FBECFC'});
+        setTheme({primary: "#F7F7F7", secondary:"#FFB22C", font1:"#854836", font2:"#C14600"});
       }
     });
   }, []);
@@ -52,6 +55,13 @@ function App(): JSX.Element {
     }
   }, [showModal, history]);
 
+  useEffect(() => {
+    const updateScreenSize = () => setScreen(getScreenSize());
+    const subscription = Dimensions.addEventListener('change', updateScreenSize);
+
+    return () => subscription.remove();
+  }, []);
+
   const styles = StyleSheet.create({
     container: {
       backgroundColor: theme.primary,
@@ -61,7 +71,7 @@ function App(): JSX.Element {
     },
     modal: {
       margin: '20%',
-      height: height * 0.6,
+      height: screen.height * 0.6, 
       width: '60%',
       backgroundColor: theme.font1,
     },
@@ -70,7 +80,7 @@ function App(): JSX.Element {
       fontSize: 20,
     },
     modalScroll: {
-      height: height * 0.48,
+      height: screen.height * 0.48,
       width: '100%',
     },
     modalEquation: {
@@ -95,24 +105,24 @@ function App(): JSX.Element {
       // padding: 10,
       justifyContent: 'center',
       alignItems: 'center',
-      height: height * 0.3,
+      height: screen.height * 0.3,
       width: '100%',
     },
     input: {
       position: 'absolute',
-      bottom: height * 0.05,
+      bottom: screen.height * 0.05,
       width: '90%',
     },
     inputText: {
       color: theme.secondary,
-      fontSize: width * 0.08,
+      fontSize: screen.isPortrait ? screen.width * 0.08 : screen.width * 0.03,
       textAlign: 'right',
     },
     equation: {
-      color: theme.primary,
-      fontSize: width * 0.05,
+      color: theme.font2,
+      fontSize: screen.isPortrait ? screen.width * 0.05 : screen.width * 0.03,
       textAlign: 'right',
-      marginBottom: 10,
+      marginBottom: screen.isPortrait ? 10 : 4,
     },
     buttonBox: {
       flex: 1,
@@ -120,29 +130,29 @@ function App(): JSX.Element {
       flexWrap: 'wrap',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: width * 0.02,
+      padding: screen.width * 0.02,
     },
     button: {
       backgroundColor: theme.secondary,
-      height: height * 0.1,
-      width: width * 0.2,
+      height: screen.isPortrait ? screen.height * 0.1 : screen.height * 0.08,
+      width: screen.width * 0.2,
       justifyContent: 'center',
       alignItems: 'center',
-      margin: width * 0.02,
+      margin: screen.isPortrait ? screen.width * 0.015 : screen.width * 0.01,
       borderRadius: 18,
     },
     enterButton: {
       backgroundColor: '#CD6161',
-      height: height * 0.1,
-      width: width * 0.2,
+      height: screen.isPortrait ? screen.height * 0.1 : screen.height * 0.08,
+      width: screen.width * 0.2,
       justifyContent: 'center',
       alignItems: 'center',
-      margin: width * 0.02,
+      margin: screen.isPortrait ? screen.width * 0.02 : screen.width * 0.01,
       borderRadius: 18,
     },
     buttonText: {
       color: theme.font1,
-      fontSize: width * 0.06,
+      fontSize: screen.isPortrait ? screen.width * 0.06 : screen.width * 0.03,
     },
   });
 

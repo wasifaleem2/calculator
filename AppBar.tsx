@@ -10,6 +10,7 @@ interface Theme {
   primary: string;
   secondary: string;
   font1: string;
+  font2: string;
 }
 interface AppBarProps {
   colors: (t: Theme) => void;
@@ -65,7 +66,7 @@ function AppBar(props: AppBarProps): JSX.Element {
 
   return (
     <View style={styles.header}>
-      <Text style={styles.headerHeading}>{'WA Calculator'}</Text>
+      <Text style={styles.headerHeading}>{'Calculator'}</Text>
       {/* <Text style={styles.pickerLabel}>{'theme'}</Text> */}
       <MaterialIcons name="invert-colors" size={20} color="white" />
       <Picker
@@ -78,12 +79,12 @@ function AppBar(props: AppBarProps): JSX.Element {
             console.log("save", itemValue)
           }
         }>
-        <Picker.Item style={{display:"none"}} enabled={false} label="Select Color" value={{primary: "#AED7F1", secondary:"#2471A3", font1:"#FBECFC"}} />
-        <Picker.Item label="blue" value={{primary: "#A1E3F9", secondary:"#3674B5", font1:"#FBFCFC"}} />
-        <Picker.Item label="dark" value={{primary: "#34495E", secondary:"#17202A", font1:"#FBFCFC"}} />
-        <Picker.Item label="green" value={{primary: "#A3D1C6", secondary:"#3D8D7A", font1:"#FBFFE4"}} />
-        <Picker.Item label="Yellow" value={{primary: "#F7F7F7", secondary:"#FFB22C", font1:"#854836"}} />
-        <Picker.Item label="coral" value={{primary: "#FFCDB2", secondary:"#E5989B", font1:"#DE3163"}} />
+        <Picker.Item style={{display:"none"}} enabled={false} label="Select Color" value={{primary: "#F7F7F7", secondary:"#FFB22C", font1:"#854836", font2:"#C14600"}} />
+        <Picker.Item label="Yellow" value={{primary: "#F7F7F7", secondary:"#FFB22C", font1:"#854836", font2:"#C14600"}} />
+        <Picker.Item label="blue" value={{primary: "#A1E3F9", secondary:"#3674B5", font1:"#FBFCFC", font2:"#7886C7"}} />
+        <Picker.Item label="dark" value={{primary: "#34495E", secondary:"#17202A", font1:"#FBFCFC", font2:"#34495E"}} />
+        <Picker.Item label="green" value={{primary: "#A3D1C6", secondary:"#3D8D7A", font1:"#FBFFE4", font2:"#3D8D7A"}} />
+        <Picker.Item label="coral" value={{primary: "#FFE4D5", secondary:"#E5989B", font1:"#DE3163", font2:"#E5989B"}} />
       </Picker>
     </View>
   );
